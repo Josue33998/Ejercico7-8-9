@@ -1,1 +1,143 @@
-# Ejercico7-8-9
+package tiposDeDatosavanzados;
+
+
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.Vector;
+
+public class Main {
+    public static void main(String[] args) {
+
+        String cadena = "Hola mundo";
+        int cadenaLen = cadena.length();
+        //15         15<16
+        for (int i = cadenaLen - 1; i >= 0; i--) {
+            System.out.print(cadena.charAt(i));
+        }
+
+        String nombres[] = {"hola", "dos", "cuatro", "nueve"};
+
+        for (int k = 0; k < nombres.length; k++) {
+            System.out.println(nombres[k]);
+        }
+        int numeros[][] = {{3, 4, 5, 7, 8}, {1, 2, 3, 4, 5}};
+        for (int l = 0; l < numeros.length; l++) {
+            for (int j = 0; j < numeros[l].length; j++) {
+                System.out.println("La posicion del Array bidimensional es : " + l + j + " y el valor es de " + numeros[l][j]);
+            }
+
+        }
+
+        Vector<Integer> numeros2 = new Vector();
+        numeros2.add(1);
+        numeros2.add(2);
+        numeros2.add(3);
+        numeros2.add(4);
+        numeros2.add(5);
+
+        numeros2.remove(1);
+        numeros2.remove(2);
+
+        for (int z = 0; z < numeros2.size(); z++) {
+            System.out.println(numeros2.get(z));
+        }
+        /*
+                Indica cuál es el problema de utilizar un Vector con la capacidad por defecto si tuviésemos
+                1000 elementos para ser añadidos al mismo.
+            */
+
+        System.out.println("\n-------------------- \n Respuesta\n--------------------");
+
+        System.out.println("Se desperdicia mucha memoria del sistema, ya que cada vez que se sobrepasa");
+
+        ArrayList<String> lista = new ArrayList<String>();
+        lista.add("Numeros");
+        lista.add("Hola");
+        lista.add("Mundo");
+        lista.add("tarde");
+
+        for (int a = 0; a < lista.size(); a++) {
+            System.out.println("La lista Linkedlist es: " + lista.get(a));
+        }
+        LinkedList<String> listalinked = new LinkedList<>(lista);
+        for (int b = 0; b < listalinked.size(); b++) {
+            System.out.println("La lista Linkedlist es:" + listalinked.get(b));
+        }
+        ArrayList<Integer> listaDel1Al10 = new ArrayList();
+        for (int c = 1; c <= 10; c++) {
+
+            listaDel1Al10.add(c);
+        }
+        System.out.println(listaDel1Al10);
+
+        for (int d = 0; d < listaDel1Al10.size(); d++) {
+            if (listaDel1Al10.get(d) % 2 != 0) {
+                listaDel1Al10.remove(d);
+            }
+        }
+
+        System.out.println(listaDel1Al10);
+
+
+    }
+
+    public static class DividePorCero {
+
+
+        public static void main(String[] args) {
+
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Indica los numeros que quieres dividir: ");
+            System.out.print("Num 1: ");
+            int a = scanner.nextInt();
+            System.out.print("Num 2: ");
+            int b = scanner.nextInt();
+            try {
+                System.out.println("Resultado: " + Division(a, b));
+            } catch (ArithmeticException e) {
+                System.out.println("Esto no puede hacerse");
+            } finally {
+                System.out.println("Demo Codigo");
+            }
+        }
+        private static int Division(int a, int b)  {
+            return a / b;
+        }
+
+    }
+    public static class CopyFichero {
+
+        public static void main(String[] args) {
+
+            Scanner scanner = new Scanner(System.in);   
+            System.out.println("Introduce el fichero del origen ");
+            String fileIn = scanner.nextLine();
+            System.out.println("Introduce el fichero de destino: ");
+            String fileOut = scanner.nextLine();
+            copy(fileIn, fileOut);
+        }
+
+        private static void copy(String fileIn, String fileOut) {
+            try {
+                InputStream in = new FileInputStream(fileIn);
+                byte[] datos = in.readAllBytes();
+                in.close();
+
+                PrintStream out = new PrintStream(fileOut);
+                out.write(datos);
+                out.close();
+            } catch (Exception e) {
+                System.out.println("Excepcion: " + e.getMessage());
+            }
+        }
+
+    }
+}
